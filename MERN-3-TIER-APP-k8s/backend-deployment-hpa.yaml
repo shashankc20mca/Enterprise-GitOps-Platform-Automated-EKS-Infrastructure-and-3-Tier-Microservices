@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: shashank20062000/mern-3tier-backend:8
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8333
+          env:
+            - name: PORT
+              value: "8333"
+            - name: MONGO_HOST
+              value: "mongodb"
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_DB
+              value: "appdb"
+            - name: MONGO_USERNAME
+              value: "admin1"
+            - name: MONGO_PASSWORD
+              value: "admin1234"
+            - name: JWT_SECRET
+              value: "supersecret_change_me"
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "125Mi"
+            limits:
+              cpu: "100m"
+              memory: "250Mi"
+    

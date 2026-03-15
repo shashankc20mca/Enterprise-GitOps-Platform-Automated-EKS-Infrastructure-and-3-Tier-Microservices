@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: shashank20062000/mern-3tier-frontend:29
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5050
+          env:
+            - name: PORT
+              value: "5050"
+            - name: REACT_APP_API_URL
+              value: ""
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "125Mi"
+            limits:
+              cpu: "100m"
+              memory: "250Mi"
