@@ -1,3 +1,4 @@
+#Docker image using base as jenkins offical image and on top of that we are installing docker and trivy which will be used in the jenkins pipeline
 FROM jenkins/jenkins:lts
 
 USER root
