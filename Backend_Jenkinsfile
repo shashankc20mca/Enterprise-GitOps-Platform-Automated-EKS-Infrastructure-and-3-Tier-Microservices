@@ -1,0 +1,101 @@
+pipeline {
+    agent any
+  environment {
+        SCANNER_HOME= tool 'sonarqube'
+       IMAGE_NAME = "shashank20062000/mern-3tier-backend"
+        IMAGE_TAG  = "${BUILD_NUMBER}"
+    }
+    stages {
+   
+      stage('Checkout Source Code') {
+            steps {
+                cleanWs()   // deletes old workspace
+                git credentialsId: 'github-creds-b',
+                    url: 'https://github.com/shashankc20mca/MERN-3-TIER-APP-Backend.git',
+                    branch: 'main'
+            }
+        }
+              stage('Trivy File-system scan') {
+            steps {
+           //this command means scan the file system in table format and generate the output in fs.html format and scan the current directory
+             sh "trivy fs --format table -o fs.html ."
+            }
+        }     
+        
+        stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('sonar-server') {
+            sh '''
+            $SCANNER_HOME/bin/sonar-scanner \
+            -Dsonar.projectName=mern-backend-app \
+            -Dsonar.projectKey=mern-backend-app \
+            -Dsonar.sources=. \
+            -Dsonar.exclusions=node_modules/**,dist/**,build/**
+            '''
+        }
+    }
+}
+   
+    
+            stage('Docker Build and tag') {
+            steps {
+                script {
+             withDockerRegistry(credentialsId: 'docker-hub', toolName: 'docker') {
+             sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+             }
+}
+            }
+        }  
+   
+           stage('Trivy image scan') {
+            steps {
+             sh "trivy image --format table -o image.html ${IMAGE_NAME}:${IMAGE_TAG}"
+            }
+        }   
+   
+           stage('Docker push image') {
+            steps {
+                script {
+             withDockerRegistry(credentialsId: 'docker-hub', toolName: 'docker') {
+             sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+             }
+}
+            }
+        }  
+
+   
+   
+   stage('Update deployment.yaml') {
+    steps {
+        dir('k8s') {
+
+            git branch: 'main',
+                credentialsId: 'github-k8s',
+                url: 'https://github.com/shashankc20mca/MERN-3-TIER-APP-k8s-.git'
+
+          withCredentials([gitUsernamePassword(credentialsId: 'github-k8s', gitToolName: 'Default')]) {
+
+                sh """
+                git config user.email "jenkins@local"
+                git config user.name "jenkins"
+
+                sed -i 's|image:.*|image: ${IMAGE_NAME}:${BUILD_NUMBER}|g' backend-deployment-hpa.yaml
+
+                git add backend-deployment-hpa.yaml
+                git commit -m "Updated deployment image to myapp:${BUILD_NUMBER}" || echo "No changes"
+
+                 git push origin main
+                """
+            }
+        }
+    }
+}
+   
+   
+   
+   
+   
+   
+    }
+}
+
