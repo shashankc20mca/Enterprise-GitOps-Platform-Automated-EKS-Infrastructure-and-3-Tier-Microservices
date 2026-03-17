@@ -607,7 +607,7 @@ This enables Argo CD to monitor the repository and maintain the same desired sta
 
 ### Repository
 
-- `MERN-3-TIER-APP-k8s`
+[MERN-3-TIER-APP-k8s](https://github.com/shashankc20mca/Enterprise-GitOps-Platform-Automated-EKS-Infrastructure-and-3-Tier-Microservices/tree/main/MERN-3-TIER-APP-k8s)
 
 ### Steps in Argo CD UI
 
