@@ -178,8 +178,25 @@ Use the following file:
 
 - `cluster_autoscaler_install_using_helm.tf`
 
+If you need to apply only the Cluster Autoscaler resources, go to the Terraform folder first:
+
 ```bash
-terraform apply cluster_autoscaler_install_using_helm.tf
+cd Terraform-Iac
+```
+
+Initialize Terraform:
+
+```bash
+terraform init
+```
+
+Then run Terraform by targeting only the resources defined in `cluster_autoscaler_install_using_helm.tf`.
+
+Sample command:
+
+```bash
+terraform plan -target=<resource_address> -out=tfplan
+terraform apply tfplan
 ```
 
 
