@@ -178,6 +178,11 @@ Use the following file:
 
 - `cluster_autoscaler_install_using_helm.tf`
 
+```bash
+terraform apply cluster_autoscaler_install_using_helm.tf
+```
+
+
 ### Verify Autoscaler Installation
 
 Run the following commands:
