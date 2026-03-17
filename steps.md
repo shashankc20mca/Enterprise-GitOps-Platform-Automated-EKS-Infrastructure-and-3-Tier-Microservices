@@ -354,11 +354,11 @@ Then add the corresponding Jenkins pipeline code.
 
 ### Frontend Pipeline
 
-- `Frontend_Jenkins`
+[Frontend_Jenkins](https://github.com/shashankc20mca/Enterprise-GitOps-Platform-Automated-EKS-Infrastructure-and-3-Tier-Microservices/blob/main/Frontend_Jenkins)
 
 ### Backend Pipeline
 
-- `Backend_Jenkinsfile`
+[Backend_Jenkinsfile](https://github.com/shashankc20mca/Enterprise-GitOps-Platform-Automated-EKS-Infrastructure-and-3-Tier-Microservices/blob/main/Backend_Jenkinsfile)
 
 ---
 
