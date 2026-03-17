@@ -58,6 +58,33 @@ First, run the Terraform scripts to create the infrastructure.
 
   [Terraform-Iac](https://github.com/shashankc20mca/Enterprise-GitOps-Platform-Automated-EKS-Infrastructure-and-3-Tier-Microservices/blob/main/Terraform-Iac/)
 
+Go to the Terraform folder containing Iac:
+
+
+```bash
+cd Terraform-Iac
+```
+
+
+Initialize Terraform:
+
+```bash
+terraform init
+```
+
+Preview the infrastructure changes:
+
+```bash
+terraform plan
+```
+
+Apply the Terraform configuration:
+
+```bash
+terraform apply
+```
+
+
 - **Do not run** the file `cluster_autoscaler_install_using_helm.tf` at this stage.
 - That file must be run **later from the bastion host** because `endpoint_public_access` is set to `false` in `variable.tf`.
 - This means the Kubernetes cluster can only be accessed through the bastion host.
