@@ -58,6 +58,25 @@ First, run the Terraform scripts to create the infrastructure.
 
   [Terraform-Iac](https://github.com/shashankc20mca/Enterprise-GitOps-Platform-Automated-EKS-Infrastructure-and-3-Tier-Microservices/blob/main/Terraform-Iac/)
 
+- **Do not run** the file `cluster_autoscaler_install_using_helm.tf` at this stage.
+- That file must be run **later from the bastion host** because `endpoint_public_access` is set to `false` in `variable.tf`.
+- This means the Kubernetes cluster can only be accessed through the bastion host.
+
+### Why `cluster_autoscaler_install_using_helm.tf` is run later
+
+Installing autoscaler through Helm requires direct cluster access. Since the EKS endpoint is private, this step can only be performed after logging into the bastion host.
+
+### Before Running Terraform
+
+Make sure to:
+
+- update the required values in `variables.tf` as per your requirement
+- include the AWS key pair details in the script files
+- use the same key pair later for SSH access
+
+---
+
+
 Go to the Terraform folder containing Iac:
 
 
@@ -85,23 +104,7 @@ terraform apply
 ```
 > **Note:** Terraform automatically reads and runs all `.tf` files present inside the `Terraform-Iac` folder, so you do not need to run each `.tf` file separately.
 
-- **Do not run** the file `cluster_autoscaler_install_using_helm.tf` at this stage.
-- That file must be run **later from the bastion host** because `endpoint_public_access` is set to `false` in `variable.tf`.
-- This means the Kubernetes cluster can only be accessed through the bastion host.
 
-### Why `cluster_autoscaler_install_using_helm.tf` is run later
-
-Installing autoscaler through Helm requires direct cluster access. Since the EKS endpoint is private, this step can only be performed after logging into the bastion host.
-
-### Before Running Terraform
-
-Make sure to:
-
-- update the required values in `variables.tf` as per your requirement
-- include the AWS key pair details in the script files
-- use the same key pair later for SSH access
-
----
 
 ## 2. SSH into the Bastion Host
 
