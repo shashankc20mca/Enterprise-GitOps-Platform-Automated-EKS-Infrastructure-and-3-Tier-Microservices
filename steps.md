@@ -83,7 +83,7 @@ Apply the Terraform configuration:
 ```bash
 terraform apply
 ```
-
+> **Note:** Terraform automatically reads and runs all `.tf` files present inside the `Terraform-Iac` folder, so you do not need to run each `.tf` file separately.
 
 - **Do not run** the file `cluster_autoscaler_install_using_helm.tf` at this stage.
 - That file must be run **later from the bastion host** because `endpoint_public_access` is set to `false` in `variable.tf`.
