@@ -632,7 +632,7 @@ Now the final step in Argo CD setup is to activate deployment by applying `appli
 
 ### Reference file
 
-- `application.yaml`
+[application.yaml](https://github.com/shashankc20mca/Enterprise-GitOps-Platform-Automated-EKS-Infrastructure-and-3-Tier-Microservices/blob/main/MERN-3-TIER-APP-k8s/application.yaml)
 
 Run:
 
