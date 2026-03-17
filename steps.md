@@ -80,6 +80,16 @@ Make sure to:
 
 After the infrastructure is created, SSH into the bastion host using the key pair that you specified earlier in the Terraform scripts.
 
+```bash
+ssh -i <path-to-your-key.pem> ec2-user@<bastion-public-ip>
+```
+
+Replace:
+
+- `<path-to-your-key.pem>` with the path to your `.pem` key file
+- `<bastion-public-ip>` with the public IP address of your bastion host
+
+
 ---
 
 ## 3. Configure the Bastion Host
