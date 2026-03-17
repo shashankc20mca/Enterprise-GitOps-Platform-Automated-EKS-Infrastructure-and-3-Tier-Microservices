@@ -244,6 +244,14 @@ Before running the Jenkins manifest, make sure to update the following in `jenki
 - volume name
 - region
 
+Run the following commands in order:
+
+```bash
+kubectl apply -f jenkins_pv.yaml
+kubectl apply -f jenkins_pvc.yaml
+kubectl apply -f jenkins_old_volume.yaml
+```
+
 ### Method 2: Set Up Jenkins from Scratch
 
 Use the following Jenkins Kubernetes manifest file:
@@ -256,6 +264,12 @@ This manifest creates Jenkins as a StatefulSet using a new EBS volume created as
 You can use the Jenkins Kubernetes manifest file available in the repository:
 
 - [jenkins.yaml](https://github.com/shashankc20mca/CI-CD-GitOps-3-Tier-Microservices-Platform/blob/main/MERN-3-TIER-APP-k8s/jenkins.yaml)
+
+```bash
+kubectl apply -f jenkins.yaml
+```
+
+
 ## 8. Verify Jenkins Deployment
 
 After running the manifest successfully, verify that the Jenkins pod is running in the current namespace.
