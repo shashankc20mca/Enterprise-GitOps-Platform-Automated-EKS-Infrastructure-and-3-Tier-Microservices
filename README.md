@@ -1,17 +1,6 @@
 # Enterprise-GitOps-Platform-Automated-EKS-Infrastructure-and-3-Tier-Microservices
 
-## More Documentation
 - [Steps to run the project](steps.md)
-
-VPC Architecture
-![Architecture](images/vpc_tf.png)
-
-EKS Architecture
-![Architecture](images/eks_user_tf.png)
-
-CI-CD Architecture
-![Architecture](images/cicd.png)
-
 # Project Overview
 
 This project, Enterprise GitOps Platform: Automated EKS Infrastructure and 3-Tier Microservices, is an advanced version of my first DevOps project. In this implementation, the main focus was to move from a basic eksctl-based cluster setup to a more secure, scalable, and production-oriented Kubernetes platform built entirely using Infrastructure as Code (IaC) with Terraform.
